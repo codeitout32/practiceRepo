@@ -1,0 +1,69 @@
+// constants
+
+name2= document.querySelector('#name2');
+age= document.querySelector('#age');
+dob= document.querySelector('#dob');
+gender= document.querySelector('#gender');
+rows = document.querySelector('#table-list')
+addButton = document.querySelector('#submit')
+var count = 1;
+
+
+addButton.addEventListener('click',(e)=>{
+    // e.preventDefault();
+    console.log(gender.value)
+
+    if(name2.value && age.value && dob.value && gender.value){
+    add2Table( count, name2.value, age.value, dob.value, gender.value);
+
+    name2.value='';
+    age.value='';
+    dob.value='';
+    gender.value='';
+    }
+});
+
+
+
+//function to add data to table
+function add2Table(id,name,age,dob,gender){
+
+    const row = document.createElement('tr');
+    const idCell = document.createElement('td');
+    const nameCell = document.createElement('td')
+    const ageCell = document.createElement('td')
+    const dobCell = document.createElement('td')
+    const genderCell = document.createElement('td');
+    const dltCell = document.createElement('td');  
+
+    // for delete button
+    const rbutton = document.createElement('button') 
+    rbutton.innerText = 'X';
+    rbutton.classList.add('btn' , 'btn-danger' , 'btn-sm', 'float-right', 'delete');
+    rbutton.addEventListener('click', removeitem);
+    dltCell.appendChild(rbutton);
+    
+    row.appendChild(idCell);
+    row.appendChild(nameCell);
+    row.appendChild(ageCell);
+    row.appendChild(dobCell);
+    row.appendChild(genderCell);
+    row.appendChild(dltCell);
+
+    idCell.textContent = id;
+    nameCell.textContent = name;
+    ageCell.textContent = age;
+    dobCell.textContent = dob;
+    genderCell.textContent = gender;
+    // console.log(row);
+    rows.appendChild(row);
+    
+
+    count++;
+}
+
+//fuction to remove row
+function removeitem(e){
+    if(e.target.tagName.toLowerCase() == 'button') e.target.parentElement.parentElement.remove();
+    // console.log(e.target.tagName.toLowerCase())
+}

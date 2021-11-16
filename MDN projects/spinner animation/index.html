@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <title>My test page</title>
+  </head>
+  <body>
+      <style>
+          html {
+  background-color: white;
+  height: 100%;
+}
+
+body {
+  height: inherit;
+  background-color: red;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div {
+  display: inline-block;
+  font-size: 10rem;
+}
+      </style>
+    <p>This is my page</p>
+
+    <div>↻</div>
+    <script>    const spinner = document.querySelector('div');
+        let rotateCount = 0;
+        let startTime = null;
+        let rAF;
+        let spinning= true;
+
+        function draw(timestamp){
+            if (!startTime) {
+            startTime = timestamp;
+             }
+
+            rotateCount = (timestamp - startTime);
+            
+
+
+            console.log(timestamp);
+            
+             rotateCount /= 3;
+
+             console.log(rotateCount);
+
+            rotateCount %= 360; 
+
+            
+            
+            spinner.style.transform = `rotate(${rotateCount}deg)`;
+
+            rAF = requestAnimationFrame(draw);
+        }
+
+        let body = document.querySelector('body');
+        
+        //console.log(timestamp);
+        body = addEventListener('click', () => {
+            if(!spinning){
+                draw();
+                spinning = true
+            } else {
+                cancelAnimationFrame(rAF);
+                spinning = false;}
+
+        } )
+
+        //draw();
+
+
+        </script>
+  </body>
+</html>

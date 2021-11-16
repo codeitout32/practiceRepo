@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async await Promis All</title>
+</head>
+<body>
+    <p>This is promise example</p>
+
+    <script>
+        async function fetchAndDecode(url, type) {
+
+            let response = await fetch(url);
+            
+            console.log(response);
+
+            let content;
+
+            if(!response.ok) throw new Error(`HTTP error status: ${response.status}`);
+
+            else if(type == 'text') content = await response.text();
+            
+            else if(type == 'blob') content = await response.blob();
+            
+            console.log(content);
+            return content;
+        }
+        
+        async function displayContent() {
+        let coffee = await fetchAndDecode('coffee.jpg', 'blob');
+
+        let object1 = URL.createObjectURL(coffee);
+
+        let image1 = document.createElement('img');
+
+        image1.src = object1;
+
+        document.body.appendChild(image1);
+
+        }
+
+        displayContent().catch((e) =>
+  console.log(e)
+);
+    </script>
+</body>
+</html>

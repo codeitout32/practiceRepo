@@ -1,0 +1,94 @@
+<!-- <html>
+    <head>
+        <title>CSS Variables</title>
+
+    </head>
+    <body>
+
+    </body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css Varialbes and JS</title>
+</head>
+<body>
+    <h2>Update CSS Variables using <span class="h1">JS</span></h2>
+
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input type="range" name="spacing" id=" " min="0" max="250" value="10" data-sizing="px">
+        <label for="blur">Blur:</label>
+        <input type="range" name="blur" id=" " min="0" max="25" value="10" data-sizing="px">
+        <label for="base">Base Color:</label>
+        <input type="color" name="color"  value="yellow" >
+    </div>
+    
+    <!-- <input type="range" name="spacing" id=" " min="0" max="25" value="10" data-sizing="px"> -->
+
+    <img width="500px" src="https://images.pexels.com/photos/611328/pexels-photo-611328.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" alt="A boat with seascape">
+
+    <style>
+
+        :root{
+            --spacing: 10px;
+            --blur: 10px;
+            --color: #fbff00;
+
+        }
+
+        img {
+            padding: var(--spacing);
+            background-color: var(--color);
+            filter: blur(var(--blur));
+        }
+
+        .h1{
+            color: var(--color);
+        }
+
+        /* styles not related to css variables */
+
+        body{
+            text-align: center;
+
+            background: #15425d;
+            font-size: 50px;
+            font-weight: 100;
+            color: white;
+            font-family: "helvetica neue", sans-serif;
+        }
+
+        .controls{
+            margin-bottom: 50px;
+        }
+
+        input{
+            width: 100px;
+        }
+
+    </style>
+
+    <script>
+        const input = document.querySelectorAll(".controls input")
+
+        function statusUpdate(){
+            console.log(this.value);
+            const suffix = this.dataset.sizing || '';
+            console.log(suffix);
+
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+
+        }
+
+        input.forEach(input => input.addEventListener('change', statusUpdate));
+        input.forEach(input => input.addEventListener('mousemove', statusUpdate));
+
+    </script>
+
+</body>
+</html>
